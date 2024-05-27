@@ -28,8 +28,8 @@
 				color: #ffffff; /* Cambia il colore dell'icona al passaggio del mouse */
 			}
 
-			/* Stili per il banner */
-			#banner {
+			 /* Stili per il banner */
+			 #banner {
             position: relative;
             overflow: hidden;
             width: 100%;
@@ -42,24 +42,33 @@
             cursor: pointer; /* Cambia il cursore al passaggio del mouse */
         }
         /* Stili per il popup */
-        .popup {
+        .popup-overlay {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            border: 2px solid #333;
-            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Sfondo semitrasparente */
             display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
         .popup-content {
-            margin-bottom: 10px;
+            background-color: black;
+            padding: 20px;
+            max-width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
         }
-        .close {
+        .popup-close {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #555;
             cursor: pointer;
         }
 		</style>
@@ -148,15 +157,18 @@
 					</section>
 					<!-- Banner con slideshow -->
     <div id="banner">
-        <img class="slide" src="image1.jpg" alt="Image 1" onclick="showPopup('New York')">
-        <img class="slide" src="image2.JPG" alt="Image 2" onclick="showPopup('Descrizione 2')">
-        <img class="slide" src="image3.JPG" alt="Image 3" onclick="showPopup('Descrizione 3')">
+        <img class="slide" src="images/image1.jpg" alt="New York" onclick="showPopup('New York')">
+        <img class="slide" src="images/image2.JPG" alt="Grand Canyon" onclick="showPopup('Grand Canyon')">
+        <img class="slide" src="images/image3.JPG" alt="Midpoint Route 66" onclick="showPopup('Midpoint Route 66')">
     </div>
 
     <!-- Popup -->
-    <div id="popup" class="popup">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <div class="popup-content" id="popup-content"></div>
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title">Popup Title</h2>
+            <p id="popup-description">Popup Description</p>
+        </div>
     </div>
 
     <script>
@@ -179,16 +191,16 @@
 
         function showPopup(description) {
             clearTimeout(timeout); // Interrompe il timeout quando si apre il popup
-            document.getElementById('popup-content').innerText = description;
-            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-title').innerText = "Image Details";
+            document.getElementById('popup-description').innerText = description;
+            document.getElementById('popup-overlay').style.display = 'flex';
         }
 
         function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
             showSlide(); // Riprende il timeout quando si chiude il popup
         }
     </script>
-
 				<!-- Three -->
 					<section id="three" class="wrapper style3 special">
 						<div class="inner">
